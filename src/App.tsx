@@ -212,11 +212,17 @@ export default function App() {
             <div className="flex flex-col gap-3 mt-8">
               {isClient && (
                 <GoogleDocExportButton
-                  canvasRef={canvasRef}
-                  document={document}
-                  color={color}
+                  lessons={filteredLessons}
                   sectionName={section?.name || ''}
+                  unitName={unit?.name || ''}
+                  courseName={mockCourse.name}
+                  courseClassName={mockClass.name}
+                  border={border}
+                  color={color}
                   googleClientId={googleClientId}
+                  includeClassName={includeClassName}
+                  teacherSignOff={teacherSignOff}
+                  includeVideoHyperlinks={includeVideoHyperlinks}
                 />
               )}
               {isClient && (
