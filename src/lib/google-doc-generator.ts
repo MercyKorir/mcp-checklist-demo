@@ -96,7 +96,7 @@ export function generateDocumentStyleRequest(): any {
   return {
     updateDocumentStyle: {
       documentStyle: {
-        marginTop: { magnitude: 36, unit: "PT" },
+        marginTop: { magnitude: 30, unit: "PT" },
         marginBottom: { magnitude: 36, unit: "PT" },
         marginLeft: { magnitude: 36, unit: "PT" },
         marginRight: { magnitude: 36, unit: "PT" },
@@ -149,11 +149,10 @@ export function generateHeaderRequests(data: DocGenerationData): any[] {
         endIndex: currentIndex + subTitleText.length,
       },
       textStyle: {
-        italic: true,
         fontSize: { magnitude: 10, unit: "PT" },
         foregroundColor: { color: { rgbColor: subtitleColor } },
       },
-      fields: "italic,fontSize,foregroundColor",
+      fields: "fontSize,foregroundColor",
     },
   });
   currentIndex += subTitleText.length;
@@ -282,7 +281,7 @@ export function generateTableContentRequests(
       columnIndices: [0],
       tableColumnProperties: {
         widthType: "FIXED_WIDTH",
-        width: { magnitude: 72, unit: "PT" },
+        width: { magnitude: 85, unit: "PT" },
       },
       fields: "width,widthType",
     },
@@ -293,7 +292,7 @@ export function generateTableContentRequests(
       columnIndices: [2],
       tableColumnProperties: {
         widthType: "FIXED_WIDTH",
-        width: { magnitude: 108, unit: "PT" },
+        width: { magnitude: 85, unit: "PT" },
       },
       fields: "width,widthType",
     },
@@ -305,7 +304,7 @@ export function generateTableContentRequests(
       columnIndices: [1],
       tableColumnProperties: {
         widthType: "FIXED_WIDTH",
-        width: { magnitude: 360, unit: "PT" },
+        width: { magnitude: 370, unit: "PT" },
       },
       fields: "width,widthType",
     },
@@ -346,7 +345,7 @@ export function generateTableContentRequests(
     text: lesson.learningTarget
       ? `Learning Goal: ${lesson.learningTarget}`
       : "Learning Goal",
-    style: { italic: true, fontSize: { magnitude: 9, unit: "PT" } },
+    style: { italic: true, fontSize: { magnitude: 10, unit: "PT" } },
   });
 
   lesson.activities.forEach((activity, i) => {
@@ -518,10 +517,10 @@ export function generateFooterContentRequest(
 
   return [
     {
-      insertInlineImage: {
+      insertPositionedObject: {
         uri: selectedBorderUrl,
         endOfSegmentLocation: { segmentId: footerId },
-        objectSize: { width: { magnitude: 450, unit: "PT" } },
+        objectSize: { width: { magnitude: 525, unit: "PT" } },
       },
     },
     {
