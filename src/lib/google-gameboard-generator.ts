@@ -476,6 +476,15 @@ function generateCellContent(
     paddingBottom: { magnitude: 4, unit: "PT" },
     paddingLeft: { magnitude: 4, unit: "PT" },
     paddingRight: { magnitude: 4, unit: "PT" },
+    contentAlignment: "MIDDLE",
+  };
+  const cellBaseFields = "backgroundColor,paddingTop,paddingBottom,paddingLeft,paddingRight,borderTop,borderBottom,borderLeft,borderRight,contentAlignment";
+
+  const paragraphStyleAndFieldsBase = {
+    paragraphStyle: {
+      alignment: "CENTER",
+    },
+    fields: "alignment,spaceAbove",
   };
 
   const insertIndex = contentIndex + 1;
@@ -485,7 +494,7 @@ function generateCellContent(
 
   switch (item.type) {
     case "start": {
-      const text = `Start!\n➡️`;
+      const text = `Start!\n\n⮕`;
       requests.push({ insertText: { text, location: { index: insertIndex } } });
       requests.push({
         updateTextStyle: {
@@ -503,11 +512,7 @@ function generateCellContent(
             startIndex: insertIndex,
             endIndex: insertIndex + text.length,
           },
-          paragraphStyle: {
-            alignment: "CENTER",
-            spaceAbove: { magnitude: 20, unit: "PT" },
-          },
-          fields: "alignment,spaceAbove",
+          ...paragraphStyleAndFieldsBase
         },
       });
 
@@ -526,8 +531,7 @@ function generateCellContent(
             ...cellStyleBase,
             backgroundColor: { color: { rgbColor: cellBackgroundColor } },
           },
-          fields:
-            "backgroundColor,paddingTop,paddingBottom,paddingLeft,paddingRight,borderTop,borderBottom,borderLeft,borderRight",
+          fields: cellBaseFields
         },
       });
       break;
@@ -537,7 +541,7 @@ function generateCellContent(
       const pageNumber = item.pageNumber ?? 2;
       const displayText = isLastPage
         ? `Finish!`
-        : `Continue to Page ${pageNumber}\n➡️`;
+        : `Continue to Page ${pageNumber}\n\n↪️`;
 
       requests.push({
         insertText: { text: displayText, location: { index: insertIndex } },
@@ -561,11 +565,7 @@ function generateCellContent(
             startIndex: insertIndex,
             endIndex: insertIndex + displayText.length,
           },
-          paragraphStyle: {
-            alignment: "CENTER",
-            spaceAbove: { magnitude: 20, unit: "PT" },
-          },
-          fields: "alignment,spaceAbove",
+          ...paragraphStyleAndFieldsBase
         },
       });
 
@@ -584,8 +584,7 @@ function generateCellContent(
             ...cellStyleBase,
             backgroundColor: { color: { rgbColor: cellBackgroundColor } },
           },
-          fields:
-            "backgroundColor,paddingTop,paddingBottom,paddingLeft,paddingRight,borderTop,borderBottom,borderLeft,borderRight",
+          fields: cellBaseFields
         },
       });
       break;
@@ -637,11 +636,7 @@ function generateCellContent(
             startIndex: insertIndex,
             endIndex: insertIndex + text.length,
           },
-          paragraphStyle: {
-            alignment: "CENTER",
-            spaceAbove: { magnitude: 20, unit: "PT" },
-          },
-          fields: "alignment,spaceAbove",
+          ...paragraphStyleAndFieldsBase
         },
       });
 
@@ -660,8 +655,7 @@ function generateCellContent(
             ...cellStyleBase,
             backgroundColor: { color: { rgbColor: colors.backgroundColor } },
           },
-          fields:
-            "backgroundColor,paddingTop,paddingBottom,paddingLeft,paddingRight,borderTop,borderBottom,borderLeft,borderRight",
+          fields: cellBaseFields
         },
       });
       break;
@@ -805,8 +799,7 @@ function generateCellContent(
             paddingRight: { magnitude: 8, unit: "PT" },
             contentAlignment: "MIDDLE",
           },
-          fields:
-            "backgroundColor,paddingTop,paddingBottom,paddingLeft,paddingRight,borderTop,borderBottom,borderLeft,borderRight,contentAlignment",
+          fields: cellBaseFields
         },
       });
       break;
@@ -964,7 +957,7 @@ function formatLessonText(
     case LessonDivider.LESSON_NUMBER:
       return lessonNumber;
     case LessonDivider.LESSON_NAME_AND_GRAPHIC:
-      return `Lesson ${lessonNumber}\n${emoji}`;
+      return `Lesson ${lessonNumber}\n\n${emoji}`;
     case LessonDivider.LESSON_NUMBER_AND_GRAPHIC:
       return `${emoji} ${lessonNumber}`;
     default:
